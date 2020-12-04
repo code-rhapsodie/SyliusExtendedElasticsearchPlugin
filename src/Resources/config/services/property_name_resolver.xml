@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.name" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_name_property_prefix%</argument>
+        </service>
+
+        <service id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.option" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_option_property_prefix%</argument>
+        </service>
+
+        <service id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.attribute" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_attribute_property_prefix%</argument>
+        </service>
+
+        <service id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.channel_pricing" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_product_price_property_prefix%</argument>
+        </service>
+
+        <service id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.price" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\PriceNameResolver">
+            <argument>%cr_ees_shop_product_price_property_prefix%</argument>
+        </service>
+
+        <service id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.description" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_description_property_prefix%</argument>
+        </service>
+
+        <service id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.short_description" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_short_description_property_prefix%</argument>
+        </service>
+
+        <service id="bitbag_sylius_elasticsearch_plugin.search_property_name_resolver_registry" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchPropertyNameResolverRegistry">
+            <call method="addPropertyNameResolver">
+                <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.name" />
+            </call>
+            <call method="addPropertyNameResolver">
+                <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.short_description" />
+            </call>
+            <call method="addPropertyNameResolver">
+                <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.description" />
+            </call>
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchPropertyNameResolverRegistryInterface" alias="bitbag_sylius_elasticsearch_plugin.search_property_name_resolver_registry" />
+
+        <service id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.taxon_position" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_taxon_position_property_prefix%</argument>
+        </service>
+    </services>
+</container>

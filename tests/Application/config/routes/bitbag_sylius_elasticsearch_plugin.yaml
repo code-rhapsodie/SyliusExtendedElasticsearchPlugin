@@ -1,0 +1,2 @@
+bitbag_sylius_elasticsearch_plugin:
+    resource: "@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Resources/config/routing.yml"

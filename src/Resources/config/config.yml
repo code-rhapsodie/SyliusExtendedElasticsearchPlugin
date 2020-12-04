@@ -1,0 +1,16 @@
+imports:
+    - { resource: "indexes/bitbag_shop_products.yml" }
+    - { resource: "indexes/bitbag_option_taxons.yml" }
+    - { resource: "indexes/bitbag_attribute_taxons.yml" }
+    - { resource: "indexes/bitbag_shop_facets.yml" }
+    - { resource: "state_machine/sylius_order.yaml" }
+
+parameters:
+    cr_ees_host: localhost
+    cr_ees_port: 9200
+
+fos_elastica:
+    clients:
+        default:
+            host: "%cr_ees_host%"
+            port: "%cr_ees_port%"

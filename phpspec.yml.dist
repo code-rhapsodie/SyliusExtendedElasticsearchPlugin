@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: CodeRhapsodie\SyliusExtendedElasticsearchPlugin
+        psr4_prefix: CodeRhapsodie\SyliusExtendedElasticsearchPlugin
