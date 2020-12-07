@@ -35,9 +35,4 @@ final class CodeRhapsodieSyliusExtendedElasticsearchExtension extends Extension 
         $container->setParameter('cr_ees_excluded_filter_options', $config['excluded_filter']['options']);
         $container->setParameter('cr_ees_excluded_filter_attributes', $config['excluded_filter']['attributes']);
     }
-
-    public function getAlias()
-    {
-        return 'cr_sylius_extendedelasticsearch';
-    }
 }
