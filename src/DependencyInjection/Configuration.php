@@ -10,9 +10,9 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('cr_sylius_extendedelasticsearch');
+        $treeBuilder = new TreeBuilder('code_rhapsodie_sylius_extended_elasticsearch');
 
-        $treeBuilder->getRootNode('cr_sylius_extendedelasticsearch')
+        $treeBuilder->getRootNode('code_rhapsodie_sylius_extended_elasticsearch')
             ->children()
                 ->arrayNode('excluded_filter')
                     ->addDefaultsIfNotSet()
