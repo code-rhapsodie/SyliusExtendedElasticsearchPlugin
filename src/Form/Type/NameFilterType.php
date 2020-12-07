@@ -22,7 +22,7 @@ final class NameFilterType extends AbstractFilterType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'label' => 'bitbag_sylius_elasticsearch_plugin.ui.name',
+            'label' => 'cr_sylius_extended_elasticsearch_plugin.ui.name',
             'required' => false,
         ]);
     }

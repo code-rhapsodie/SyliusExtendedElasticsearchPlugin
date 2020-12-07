@@ -13,13 +13,13 @@
 
 {% block content %}
     <h1 class="ui monster section dividing header">
-        {{ 'bitbag_sylius_elasticsearch_plugin.ui.search_header'|trans }}
+        {{ 'cr_sylius_extended_elasticsearch_plugin.ui.search_header'|trans }}
     </h1>
     <div class="ui stackable grid">
         <div class="four wide column">
             <div id="filters-vertical" class="ui fluid vertical menu">
                 <div class="header item">
-                    {{ 'bitbag_sylius_elasticsearch_plugin.ui.filter_results'|trans }}
+                    {{ 'cr_sylius_extended_elasticsearch_plugin.ui.filter_results'|trans }}
                 </div>
                 {{ form_start(searchForm, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
                     <div style="display: none;">
@@ -31,7 +31,7 @@
                     <div class="item">
                         <button type="submit" class="ui primary icon labeled button fluid">
                             <i class="search icon"></i>
-                            {{ 'bitbag_sylius_elasticsearch_plugin.ui.filter'|trans }}
+                            {{ 'cr_sylius_extended_elasticsearch_plugin.ui.filter'|trans }}
                         </button>
                     </div>
                 {{ form_end(searchForm) }}

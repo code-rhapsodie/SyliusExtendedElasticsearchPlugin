@@ -58,7 +58,7 @@ final class SearchFormEventListener
                 $search = new Search();
             }
             $this->form = $this->formFactory
-                ->create(SearchType::class, $search, ['action' => $this->router->generate('bitbag_sylius_elasticsearch_plugin_shop_search')]);
+                ->create(SearchType::class, $search, ['action' => $this->router->generate('cr_sylius_extended_elasticsearch_plugin_shop_search')]);
         }
         return $this->form;
     }

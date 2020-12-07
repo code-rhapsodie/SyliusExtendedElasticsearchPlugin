@@ -2,55 +2,55 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.name_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\NameFilterType">
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.name_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\NameFilterType">
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.product_options_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ProductOptionsFilterType">
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.product_options_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ProductOptionsFilterType">
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.context.product_options" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.option" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.form.type.choice_mapper.product_options" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.option" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.form.type.choice_mapper.product_options" />
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.product_attributes_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ProductAttributesFilterType">
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.product_attributes_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ProductAttributesFilterType">
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.context.product_attributes" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.attribute" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.form.type.choice_mapper.product_attributes" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.attribute" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.form.type.choice_mapper.product_attributes" />
             <argument>%cr_ees_excluded_filter_attributes%</argument>
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.price_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\PriceFilterType">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.price" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.price_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\PriceFilterType">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.price" />
             <argument type="service" id="sylius.context.currency.channel_aware" />
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.shop_products_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ShopProductsFilterType">
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.shop_products_filter" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ShopProductsFilterType">
             <argument>%cr_ees_shop_name_property_prefix%</argument>
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.choice_mapper.product_options" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ChoiceMapper\ProductOptionsMapper">
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.choice_mapper.product_options" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ChoiceMapper\ProductOptionsMapper">
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.string_formatter" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.choice_mapper.product_attributes" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ChoiceMapper\ProductAttributesMapper">
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.choice_mapper.product_attributes" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\ChoiceMapper\ProductAttributesMapper">
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.repository.product_attribute_value_repository" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.string_formatter" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.search" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\SearchType">
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.search" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\SearchType">
             <argument type="service" id="fos_elastica.finder.bitbag_shop_product.default" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.facet.registry" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.query_builder.search_products" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.facet.registry" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.search_products" />
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.form.type.search.facets" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\SearchFacetsType">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.facet.registry" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.form.type.search.facets" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\SearchFacetsType">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.facet.registry" />
             <tag name="form.type" />
         </service>
     </services>

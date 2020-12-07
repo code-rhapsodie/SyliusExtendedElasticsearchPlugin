@@ -1,4 +1,4 @@
-bitbag_sylius_elasticsearch_plugin:
+cr_sylius_extended_elasticsearch_plugin:
     ui:
         min_price: Cena od
         max_price: Cena do

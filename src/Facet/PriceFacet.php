@@ -85,6 +85,6 @@ final class PriceFacet implements FacetInterface
 
     public function getLabel(): string
     {
-        return 'bitbag_sylius_elasticsearch_plugin.ui.facet.price.label';
+        return 'cr_sylius_extended_elasticsearch_plugin.ui.facet.price.label';
     }
 }

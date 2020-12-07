@@ -21,7 +21,7 @@
         <div class="four wide column">
             <div id="filters-vertical" class="ui fluid vertical menu">
                 <div class="header item">
-                    {{ 'bitbag_sylius_elasticsearch_plugin.ui.filter_results'|trans }}
+                    {{ 'cr_sylius_extended_elasticsearch_plugin.ui.filter_results'|trans }}
                 </div>
                 {% include '@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Shop/Product/Index/_filterForm.html.twig' %}
             </div>
@@ -69,6 +69,6 @@
     {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'bundles/CodeRhapsodieSyliusExtendedElasticsearchPlugin/js/bitbag-autocomplete-search.js'} %}
 
     <script type="application/javascript">
-        $(document).autocompleteSearch('#products-search', '{{ url('bitbag_sylius_elasticsearch_plugin_shop_auto_complete_product_name') }}?query={query}')
+        $(document).autocompleteSearch('#products-search', '{{ url('cr_sylius_extended_elasticsearch_plugin_shop_auto_complete_product_name') }}?query={query}')
     </script>
 {% endblock %}

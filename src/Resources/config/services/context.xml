@@ -10,12 +10,12 @@
 
         <service id="bitbag.sylius_elasticsearch_plugin.context.product_options" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Context\ProductOptionsContext">
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.context.taxon" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.finder.product_options" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.finder.product_options" />
         </service>
 
         <service id="bitbag.sylius_elasticsearch_plugin.context.product_attributes" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Context\ProductAttributesContext">
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.context.taxon" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.finder.product_attributes" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.finder.product_attributes" />
         </service>
     </services>
 </container>

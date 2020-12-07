@@ -39,7 +39,7 @@ final class ProductContext implements Context
     {
         $this->client->request(
             'GET',
-            $this->router->generate('bitbag_sylius_elasticsearch_plugin_shop_auto_complete_product_name', ['_locale' => 'en_US', 'query' => $phrase]),
+            $this->router->generate('cr_sylius_extended_elasticsearch_plugin_shop_auto_complete_product_name', ['_locale' => 'en_US', 'query' => $phrase]),
             [],
             [],
             ['ACCEPT' => 'application/json']

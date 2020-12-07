@@ -1,4 +1,4 @@
-bitbag_sylius_elasticsearch_plugin:
+cr_sylius_extended_elasticsearch_plugin:
     min_price_numeric: Min price must be a valid price
     max_price_numeric: Max price must be a valid price
     min_price_positive_or_zero: Min price cannot be negative

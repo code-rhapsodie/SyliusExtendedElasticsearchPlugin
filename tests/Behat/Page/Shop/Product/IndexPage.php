@@ -18,7 +18,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     public function getRouteName(): string
     {
-        return 'bitbag_sylius_elasticsearch_plugin_shop_list_products';
+        return 'cr_sylius_extended_elasticsearch_plugin_shop_list_products';
     }
 
     public function searchByPhase(string $name): void

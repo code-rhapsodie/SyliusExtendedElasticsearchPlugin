@@ -3,81 +3,81 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.product_name" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductNameBuilder">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.name" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.product_name" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductNameBuilder">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.name" />
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.option" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\OptionBuilder">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.option" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.option" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\OptionBuilder">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.option" />
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.string_formatter" />
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.attribute" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\AttributeBuilder">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.attribute" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.attribute" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\AttributeBuilder">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.attribute" />
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.string_formatter" />
             <argument type="service" id="sylius.context.locale" />
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.product_taxons" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductTaxonsBuilder">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_builder.mapper.product_taxons" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.product_taxons" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductTaxonsBuilder">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_builder.mapper.product_taxons" />
             <argument>%cr_ees_shop_product_taxons_property%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.channels" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ChannelsBuilder">
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.channels" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ChannelsBuilder">
             <argument>%cr_ees_shop_channels_property%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.channel_pricing" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ChannelPricingBuilder">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.channel_pricing" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.channel_pricing" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ChannelPricingBuilder">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.channel_pricing" />
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.sold_units" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\SoldUnitsPropertyBuilder">
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.sold_units" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\SoldUnitsPropertyBuilder">
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.repository.order_item_repository" />
             <argument>%cr_ees_shop_product_sold_units%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.product_created_at" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductCreatedAtPropertyBuilder">
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.product_created_at" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductCreatedAtPropertyBuilder">
             <argument>%cr_ees_shop_product_created_at%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.option_taxons" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\OptionTaxonsBuilder">
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.option_taxons" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\OptionTaxonsBuilder">
             <argument type="service" id="sylius.repository.product_option_value" />
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.repository.product_variant" />
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_builder.mapper.product_taxons" />
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_builder.mapper.product_taxons" />
             <argument>%cr_ees_shop_option_taxons_property%</argument>
             <argument>%cr_ees_excluded_filter_options%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.attribute_taxons" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\AttributeTaxonsBuilder">
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.attribute_taxons" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\AttributeTaxonsBuilder">
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.repository.taxon_repository" />
             <argument>%cr_ees_shop_attribute_taxons_property%</argument>
             <argument>%cr_ees_excluded_filter_attributes%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.main_taxon_position" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductTaxonPositionPropertyBuilder">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.taxon_position" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.main_taxon_position" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductTaxonPositionPropertyBuilder">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.taxon_position" />
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.mapper.product_taxons" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\Mapper\ProductTaxonsMapper" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.mapper.product_taxons" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\Mapper\ProductTaxonsMapper" />
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.product_description" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductDescriptionBuilder">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.description" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.product_description" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductDescriptionBuilder">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.description" />
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="bitbag_sylius_elasticsearch_plugin.property_builder.product_short_description" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductShortDescriptionBuilder">
-            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.short_description" />
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_builder.product_short_description" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\ProductShortDescriptionBuilder">
+            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.short_description" />
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

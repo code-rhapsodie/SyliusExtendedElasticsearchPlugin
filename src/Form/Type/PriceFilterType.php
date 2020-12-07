@@ -37,30 +37,30 @@ final class PriceFilterType extends AbstractFilterType
     {
         $builder
             ->add($this->priceNameResolver->resolveMinPriceName(), MoneyType::class, [
-                'label' => 'bitbag_sylius_elasticsearch_plugin.ui.min_price',
+                'label' => 'cr_sylius_extended_elasticsearch_plugin.ui.min_price',
                 'required' => false,
                 'currency' => $this->currencyContext->getCurrencyCode(),
                 'constraints' => [
                     new Type([
                         'type' => 'numeric',
-                        'message' => 'bitbag_sylius_elasticsearch_plugin.min_price_numeric',
+                        'message' => 'cr_sylius_extended_elasticsearch_plugin.min_price_numeric',
                     ]),
                     new PositiveOrZero([
-                        'message' => 'bitbag_sylius_elasticsearch_plugin.min_price_positive_or_zero',
+                        'message' => 'cr_sylius_extended_elasticsearch_plugin.min_price_positive_or_zero',
                     ]),
                 ],
             ])
             ->add($this->priceNameResolver->resolveMaxPriceName(), MoneyType::class, [
-                'label' => 'bitbag_sylius_elasticsearch_plugin.ui.max_price',
+                'label' => 'cr_sylius_extended_elasticsearch_plugin.ui.max_price',
                 'required' => false,
                 'currency' => $this->currencyContext->getCurrencyCode(),
                 'constraints' => [
                     new Type([
                         'type' => 'numeric',
-                        'message' => 'bitbag_sylius_elasticsearch_plugin.max_price_numeric',
+                        'message' => 'cr_sylius_extended_elasticsearch_plugin.max_price_numeric',
                     ]),
                     new PositiveOrZero([
-                        'message' => 'bitbag_sylius_elasticsearch_plugin.min_price_positive_or_zero',
+                        'message' => 'cr_sylius_extended_elasticsearch_plugin.min_price_positive_or_zero',
                     ]),
                 ],
             ])

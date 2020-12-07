@@ -42,7 +42,7 @@ Import routing **on top** of your `config/routes.yaml` file:
 ```yaml
 # config/routes.yaml
 
-bitbag_sylius_elasticsearch_plugin:
+cr_sylius_extended_elasticsearch_plugin:
     resource: "@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Resources/config/routing.yml"
 ```
 
@@ -55,7 +55,7 @@ redirect_sylius_shop_product_index:
     path: /{_locale}/taxons/{slug}
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
     defaults:
-        route: bitbag_sylius_elasticsearch_plugin_shop_list_products
+        route: cr_sylius_extended_elasticsearch_plugin_shop_list_products
         permanent: true
     requirements:
         _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
@@ -103,7 +103,7 @@ You might also want to refer the horizontal menu to a new product list page. Fol
 1. If you haven't done it yet, create two files:
     * `_horizontalMenu.html.twig` in `templates/bundles/SyliusShopBundle/Taxon` directory
     * `_breadcrumb.html.twig` in `templates/bundles/SyliusShopBundle/Product/Show` directory
-2. Paste into those files content of respectively `vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Taxon/_horizontalMenu.html.twig` and `vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Product/Show/_breadcrumb.html.twig` files, replacing `sylius_shop_product_index` with `bitbag_sylius_elasticsearch_plugin_shop_list_products` in both of them.
+2. Paste into those files content of respectively `vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Taxon/_horizontalMenu.html.twig` and `vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Product/Show/_breadcrumb.html.twig` files, replacing `sylius_shop_product_index` with `cr_sylius_extended_elasticsearch_plugin_shop_list_products` in both of them.
 3. Clean your cache with `bin/console cache:clear` command.
 4. :tada:
 
@@ -145,7 +145,7 @@ Indexes with `bitbag_shop_product`, `bitbag_attribute_taxons` and `bitbag_option
 
 This plugin offers a site-wide search feature as well. You have a search box field where you query all products indexed on ElasticSearch. When you enter a query in the search box the results will appear in the search results page.
 
-You can also add search facets (a.k.a. filters) to your search results page. To do so you have to add facets to the `bitbag_sylius_elasticsearch_plugin.facet.registry` service (see an example of this service definition [here](https://github.com/code-rhapsodie/SyliusExtendedElasticsearchPlugin/blob/master/tests/Application/config/services.yaml)). A facet is a service which implements the `CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\FacetInterface`. You can implement your own facets from scratch or you can [decorate](https://symfony.com/doc/current/service_container/service_decoration.html) one of the basic facet implementation included in this plugin, which are:
+You can also add search facets (a.k.a. filters) to your search results page. To do so you have to add facets to the `cr_sylius_extended_elasticsearch_plugin.facet.registry` service (see an example of this service definition [here](https://github.com/code-rhapsodie/SyliusExtendedElasticsearchPlugin/blob/master/tests/Application/config/services.yaml)). A facet is a service which implements the `CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\FacetInterface`. You can implement your own facets from scratch or you can [decorate](https://symfony.com/doc/current/service_container/service_decoration.html) one of the basic facet implementation included in this plugin, which are:
 
 * [`TaxonFacet`](https://github.com/code-rhapsodie/SyliusExtendedElasticsearchPlugin/blob/master/src/Facet/TaxonFacet.php) which allows to filter your search results by taxons using the ElasticSearch [`Terms`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html) aggregation.
 * [`AttributeFacet`](https://github.com/code-rhapsodie/SyliusExtendedElasticsearchPlugin/blob/master/src/Facet/AttributeFacet.php) which allows to filter your search results by product attributes values using the ElasticSearch [`Terms`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html) aggregation.

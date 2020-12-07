@@ -14,7 +14,7 @@ class SearchPage extends SymfonyPage implements SearchPageInterface
 {
     public function getRouteName(): string
     {
-        return 'bitbag_sylius_elasticsearch_plugin_shop_search';
+        return 'cr_sylius_extended_elasticsearch_plugin_shop_search';
     }
 
     public function searchPhrase(string $phrase): void
