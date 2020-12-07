@@ -47,14 +47,14 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Code-Rhapsodie\\SyliusExtendedElasticsearchPlugin\\": "src/"
+            "CodeRhapsodie\\SyliusExtendedElasticsearchPlugin\\": "src/",
+            "Tests\\CodeRhapsodie\\SyliusExtendedElasticsearchPlugin\\Application\\": "tests/Application"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Code-Rhapsodie\\SyliusExtendedElasticsearchPlugin\\Behat\\": "tests/Behat",
-            "spec\\Code-Rhapsodie\\SyliusExtendedElasticsearchPlugin\\": "spec/",
-            "Tests\\Code-Rhapsodie\\SyliusExtendedElasticsearchPlugin\\Application\\": "tests/Application"
+            "Tests\\CodeRhapsodie\\SyliusExtendedElasticsearchPlugin\\Behat\\": "tests/Behat",
+            "spec\\CodeRhapsodie\\SyliusExtendedElasticsearchPlugin\\": "spec/"
         },
         "classmap": ["tests/Application/Kernel.php"]
     }
