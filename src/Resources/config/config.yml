@@ -4,6 +4,8 @@ imports:
     - { resource: "indexes/bitbag_attribute_taxons.yml" }
     - { resource: "indexes/bitbag_shop_facets.yml" }
     - { resource: "state_machine/sylius_order.yaml" }
+    - { resource: "grid/grid_exclude_attribute.yaml" }
+    - { resource: "grid/grid_exclude_option.yaml" }
 
 parameters:
     cr_ees_host: localhost

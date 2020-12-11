@@ -18,3 +18,57 @@ bitbag_sylius_elasticsearch_plugin_shop_search:
     defaults:
         _controller: bitbag_sylius_elasticsearch_plugin.controller.action.shop.search
         template: "@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Shop/search.html.twig"
+
+cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_index:
+    path: /admin/search/exclude-attributes
+    controller: sylius.controller.product_attribute:indexAction
+    defaults:
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin\\Crud/index.html.twig"
+            redirect: update
+            grid: cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_index
+            vars:
+                all:
+                    subheader: sylius.ui.manage_attributes_of_your_products
+                index:
+                    icon: 'cubes'
+
+
+cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_toggle:
+    path: /admin/search/excluded-attributes/toggle/{id}
+    controller: App\Controller\ProductAttributeController:modifyFilterExcluded
+    defaults:
+        _sylius:
+            section: admin
+            permission: true
+    requirements:
+        id: \d+
+
+cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_index:
+    path: /admin/search/exclude-options
+    controller: sylius.controller.product_option:indexAction
+    defaults:
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin\\Crud/index.html.twig"
+            redirect: update
+            grid: cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_index
+            vars:
+                all:
+                    subheader: sylius.ui.manage_configuration_options_of_your_products
+                index:
+                    icon: 'options'
+
+cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_toggle:
+    path: /admin/search/excluded-options/toggle/{id}
+    controller: App\Controller\ProductOptionController:modifyFilterExcluded
+    defaults:
+        _sylius:
+            section: admin
+            permission: true
+    requirements:
+        id: \d+
+

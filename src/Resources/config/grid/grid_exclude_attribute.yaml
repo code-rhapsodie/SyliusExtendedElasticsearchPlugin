@@ -1,0 +1,57 @@
+sylius_grid:
+    grids:
+        cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_index:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Product\ProductAttribute
+            fields:
+#                id:
+#                    type: twig
+#                    label: sylius.ui.id
+#                    options:
+#                        template: "@SyliusUi/Grid/Field/_id.html.twig"
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    path: name
+                position:
+                    type: twig
+                    label: sylius.ui.position
+                    options:
+                        template: "@SyliusUi/Grid/Field/_position.html.twig"
+                type:
+                    type: string
+                    label: sylius.ui.type
+                filterExcluded:
+                    type: twig
+                    label: bitbag_sylius_elasticsearch_plugin.ui.filter_excluded
+                    options:
+                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
+                    
+#                configuration:
+#                    type: twig
+#                    label: sylius.ui.configuration
+#                    options:
+#                        template: "@SyliusUi/Grid/Field/_configuration.html.twig"
+#                storageType:
+#                    type: string
+#                    label: sylius.ui.storageType
+            actions:
+                main:
+                item:
+                    include_exclude:
+                        type: include_exclude
+                        label: bitbag_sylius_elasticsearch_plugin.ui.include_exclude
+                        options:
+                            link:
+                                route: cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_toggle
+                                parameters:
+                                    id: resource.id
+    templates:
+        action:
+            include_exclude: "@SyliusUi/Grid/Action/include_exclude.html.twig"
+

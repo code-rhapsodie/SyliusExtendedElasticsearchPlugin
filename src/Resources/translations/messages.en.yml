@@ -24,3 +24,5 @@ bitbag_sylius_elasticsearch_plugin:
                 label: Price
             taxon:
                 label: Taxon
+        filter_excluded: Filter excluded
+        include_exclude: Include or Exclude

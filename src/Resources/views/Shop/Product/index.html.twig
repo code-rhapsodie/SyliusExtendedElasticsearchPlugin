@@ -36,7 +36,7 @@
                     <div class="eleven wide column">
                         <div class="ui search" id="products-search">
                             <div class="ui fluid large left icon input">
-                                {{ form_widget(form.name, {'attr': {'placeholder': 'sylius.ui.search', 'class': 'prompt'}}) }}
+                                {{ form_widget(form|search_name_field, {'attr': {'placeholder': 'sylius.ui.search', 'class': 'prompt'}}) }}
                                 <i class="search icon"></i>
                             </div>
                         </div>
