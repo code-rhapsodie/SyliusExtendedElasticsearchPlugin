@@ -46,6 +46,18 @@ cr_sylius_extended_elasticsearch_plugin:
     resource: "@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Resources/config/routing.yml"
 ```
 
+Create a file named `bit_bag_sylius_elasticsearch.yaml` in `config/packages` 
+in which you will add this code to have the default configuration services : 
+```
+code_rhapsodie_sylius_extended_elasticsearch:
+    excluded_filter:
+        options: ['option1']
+        attributes: ['attribute1']
+    filter_attributes_max: 30
+    filter_options_max: 30
+```
+
+
 ...and set up the redirection from the default Sylius shop products index page on top of your `config/routes/sylius_shop.yaml`
 file.
 ```
