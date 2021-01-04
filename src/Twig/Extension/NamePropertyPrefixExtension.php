@@ -4,7 +4,29 @@
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Twig\Extension;
 
 
-class NamePropertyPrefixExtension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+class NamePropertyPrefixExtension extends AbstractExtension
 {
+    /** @var string */
+    private $namePropertyPrefix;
+
+    public function __construct(string $namePropertyPrefix)
+    {
+        $this->namePropertyPrefix = $namePropertyPrefix;
+    }
+
+    public function getFilters()
+    {
+        return [
+            new TwigFilter('search_name_field', [$this, 'getName'])
+        ];
+    }
+
+    public function getName($form)
+    {
+        return $form[$this->namePropertyPrefix];
+    }
 
 }
