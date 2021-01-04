@@ -4,13 +4,8 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: App\Entity\Product\ProductAttribute
+                    class: '%sylius.model.product_attribute.class%'
             fields:
-#                id:
-#                    type: twig
-#                    label: sylius.ui.id
-#                    options:
-#                        template: "@SyliusUi/Grid/Field/_id.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
@@ -31,15 +26,6 @@ sylius_grid:
                     label: bitbag_sylius_elasticsearch_plugin.ui.filter_excluded
                     options:
                         template: "@SyliusUi/Grid/Field/yesNo.html.twig"
-                    
-#                configuration:
-#                    type: twig
-#                    label: sylius.ui.configuration
-#                    options:
-#                        template: "@SyliusUi/Grid/Field/_configuration.html.twig"
-#                storageType:
-#                    type: string
-#                    label: sylius.ui.storageType
             actions:
                 main:
                 item:
