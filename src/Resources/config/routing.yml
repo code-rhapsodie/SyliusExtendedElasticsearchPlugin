@@ -38,7 +38,7 @@ cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_index:
 
 cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_toggle:
     path: /admin/search/excluded-attributes/toggle/{id}
-    controller: App\Controller\ProductAttributeController:modifyFilterExcluded
+    controller: CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductAttributeController::modifyFilterExcluded
     defaults:
         _sylius:
             section: admin
@@ -64,7 +64,7 @@ cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_index:
 
 cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_toggle:
     path: /admin/search/excluded-options/toggle/{id}
-    controller: App\Controller\ProductOptionController:modifyFilterExcluded
+    controller: CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductOptionController::modifyFilterExcluded
     defaults:
         _sylius:
             section: admin

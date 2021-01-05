@@ -39,5 +39,20 @@
         <service id="bitbag.sylius_elasticsearch_plugin.refresher.resource" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Refresher\ResourceRefresher">
             <argument type="service" id="service_container" />
         </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Menu\AdminMenuListener" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Menu\AdminMenuListener">
+            <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addAdminMenuItems" />
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductAttributeController" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductAttributeController">
+            <tag name="controller.service_arguments" />
+            <argument key="$repository" type="service" id="sylius.repository.product_attribute"/>
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductOptionController" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductOptionController">
+            <tag name="controller.service_arguments" />
+            <argument key="$repository" type="service" id="sylius.repository.product_option"/>
+        </service>
+
     </services>
 </container>
