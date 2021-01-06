@@ -4,10 +4,12 @@
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller;
 
 
+use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Finder\FinderExcludable;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class ProductOptionController extends AbstractController
 {

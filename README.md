@@ -123,6 +123,21 @@ parameters:
 By default all options and attributes are indexed. After you change these parameters, remember to run `bin/console fo:el:po` command again
 (a shortcut for `fos:elastica:populate`).
 
+### Exclude attributes and options dynamically from the search filter    
+To allow dynamic exclusion of attributes, the `App\Entity\Product\ProductAttribute` class must implement the` CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Finder\FinderExcludable`interface <br/>
+For example:
+```
+use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Finder\FinderExcludable
+
+class ProductAttribute implements FinderExcludable
+```
+If it's not the case(`ProductAttribute` doesn't implement `FinderExcludable`), the product attribute exclusion menu list will not be visible and will not appear. <br/>
+It works the same way to allow dynamic exclusion of options.
+
+
+
+
+
 ### Reindexing
 
 By default, current indexes listen on all Doctrine events. You can override this setting for each index by overriding index definition in your `config.yml` file:
