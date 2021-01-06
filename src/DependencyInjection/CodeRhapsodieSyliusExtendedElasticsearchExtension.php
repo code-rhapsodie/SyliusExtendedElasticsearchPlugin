@@ -7,9 +7,8 @@ namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class CodeRhapsodieSyliusExtendedElasticsearchExtension extends Extension implements PrependExtensionInterface
 {
@@ -22,7 +21,6 @@ final class CodeRhapsodieSyliusExtendedElasticsearchExtension extends Extension 
         $configuration = new Configuration();
 
         $config = $this->processConfiguration($configuration, $config);
-
     }
 
     public function prepend(ContainerBuilder $container)

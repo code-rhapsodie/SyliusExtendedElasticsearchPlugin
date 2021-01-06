@@ -1,15 +1,12 @@
 <?php
 
+declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller;
 
-
-use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Finder\FinderExcludable;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-
 
 class ProductOptionController extends AbstractController
 {
@@ -27,7 +24,7 @@ class ProductOptionController extends AbstractController
 
         if (!$productOption) {
             throw $this->createNotFoundException(
-                'No product found for id '.$id
+                'No product found for id ' . $id
             );
         }
 
@@ -37,10 +34,7 @@ class ProductOptionController extends AbstractController
         $this->addFlash('success', 'Exclude has been updated');
 
         return $this->redirectToRoute('cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_index', [
-            'id' => $productOption->getId()
+            'id' => $productOption->getId(),
         ]);
-
     }
-
-
 }

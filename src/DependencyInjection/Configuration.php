@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\DependencyInjection;
 
@@ -41,5 +42,4 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
-
 }

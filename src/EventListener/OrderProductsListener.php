@@ -13,9 +13,7 @@ declare(strict_types=1);
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\EventListener;
 
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Refresher\ResourceRefresherInterface;
-use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemInterface;
 
 final class OrderProductsListener

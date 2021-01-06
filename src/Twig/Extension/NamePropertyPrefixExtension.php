@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Twig\Extension;
-
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -20,7 +20,7 @@ class NamePropertyPrefixExtension extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('search_name_field', [$this, 'getName'])
+            new TwigFilter('search_name_field', [$this, 'getName']),
         ];
     }
 
@@ -28,5 +28,4 @@ class NamePropertyPrefixExtension extends AbstractExtension
     {
         return $form[$this->namePropertyPrefix];
     }
-
 }
