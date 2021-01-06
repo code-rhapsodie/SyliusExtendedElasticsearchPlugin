@@ -20,7 +20,7 @@ bitbag_sylius_elasticsearch_plugin_shop_search:
         template: "@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Shop/search.html.twig"
 
 cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_index:
-    path: /admin/search/exclude-attributes
+    path: '/%sylius_admin.path_name%/search/exclude-attributes'
     controller: sylius.controller.product_attribute:indexAction
     defaults:
         _sylius:
@@ -37,7 +37,7 @@ cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_index:
 
 
 cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_toggle:
-    path: /admin/search/excluded-attributes/toggle/{id}
+    path: '/%sylius_admin.path_name%/search/excluded-attributes/toggle/{id}'
     controller: CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductAttributeController::modifyFilterExcluded
     defaults:
         _sylius:
@@ -47,7 +47,7 @@ cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_toggle:
         id: \d+
 
 cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_index:
-    path: /admin/search/exclude-options
+    path: '/%sylius_admin.path_name%/search/exclude-options'
     controller: sylius.controller.product_option:indexAction
     defaults:
         _sylius:
@@ -63,7 +63,7 @@ cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_index:
                     icon: 'options'
 
 cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_toggle:
-    path: /admin/search/excluded-options/toggle/{id}
+    path: '/%sylius_admin.path_name%/search/excluded-options/toggle/{id}'
     controller: CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductOptionController::modifyFilterExcluded
     defaults:
         _sylius:

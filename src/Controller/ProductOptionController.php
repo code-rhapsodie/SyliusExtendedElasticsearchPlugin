@@ -20,10 +20,6 @@ class ProductOptionController extends AbstractController
         $this->repository = $repository;
     }
 
-    /**
-     * @Route("/admin/search/excluded-options/toggle/{id}", name="cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_toggle")
-     */
-
     public function modifyFilterExcluded(int $id): Response
     {
         $productOption = $this->repository

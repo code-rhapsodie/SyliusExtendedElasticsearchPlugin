@@ -19,10 +19,6 @@ class ProductAttributeController extends AbstractController
         $this->repository = $repository;
     }
 
-    /**
-     * @Route("/admin/search/excluded-attributes/toggle/{id}", name="cr_sylius_extended_elasticsearch_plugin_admin_exclude_attribute_toggle")
-     */
-
     public function modifyFilterExcluded(int $id): Response
     {
 
