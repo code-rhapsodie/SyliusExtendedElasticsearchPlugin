@@ -1,0 +1,45 @@
+sylius_grid:
+    grids:
+        cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_index:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%sylius.model.product_option.class%'
+            fields:
+                id:
+                    type: twig
+                    label: sylius.ui.id
+                    options:
+                        template: "@SyliusUi/Grid/Field/_id.html.twig"
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    path: name
+                position:
+                    type: twig
+                    label: sylius.ui.position
+                    options:
+                        template: "@SyliusUi/Grid/Field/_position.html.twig"
+                filterExcluded:
+                    type: twig
+                    label: bitbag_sylius_elasticsearch_plugin.ui.filter_excluded
+                    options:
+                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
+            actions:
+                main:
+                item:
+                    include_exclude:
+                        type: include_exclude
+                        label: bitbag_sylius_elasticsearch_plugin.ui.include_exclude
+                        options:
+                            link:
+                                route: cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_toggle
+                                parameters:
+                                    id: resource.id
+    templates:
+        action:
+            include_exclude: "@SyliusUi/Grid/Action/include_exclude.html.twig"
+

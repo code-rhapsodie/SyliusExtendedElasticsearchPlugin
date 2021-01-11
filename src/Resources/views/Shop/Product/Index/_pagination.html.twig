@@ -1,6 +1,6 @@
 {% set route = app.request.attributes.get('_route') %}
 {% set slug = app.request.get('slug') %}
-{% set availableLimits = constant('BitBag\\SyliusElasticsearchPlugin\\Controller\\RequestDataHandler\\PaginationDataHandlerInterface::AVAILABLE_LIMITS') %}
+{% set availableLimits = constant('CodeRhapsodie\\SyliusExtendedElasticsearchPlugin\\Controller\\RequestDataHandler\\PaginationDataHandlerInterface::AVAILABLE_LIMITS') %}
 {% set queryParameters = app.request.query.all|unset_elements(['limit']) %}
 
 <div class="ui compact menu">
