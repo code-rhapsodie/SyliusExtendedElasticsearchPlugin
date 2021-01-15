@@ -56,5 +56,24 @@
             <argument key="$repository" type="service" id="sylius.repository.product_option"/>
         </service>
 
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepositoryInterface" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepository">
+        </service>
+
+        <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
+            <argument>@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Crud/SearchConfiguration/javascripts.html.twig</argument>
+            <tag name="kernel.event_listener" event="sonata.block.event.cr_sylius_extended_elasticsearch_plugin.admin.search_configuration.create.javascripts" method="onBlockEvent" />
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" />
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistryInterface" alias="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" />
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\CheckboxFacetType" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\CheckboxFacetType">
+            <tag name="cr.sylius_extended_elasticsearch_plugin.facet_type" />
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\FacetTypeChoiceType" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\FacetTypeChoiceType">
+            <argument key="$facetTypeRegistry" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistryInterface" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

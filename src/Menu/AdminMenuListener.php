@@ -24,8 +24,8 @@ final class AdminMenuListener
         $menu = $event->getMenu();
 
         $newConfiguration = $menu
-                ->addChild('newConf')
-                ->setLabel('Extended Search');
+            ->addChild('cr_extended_search')
+            ->setLabel('cr_sylius_extended_elasticsearch_plugin.admin.menu.extended_search.label');
 
         if (is_subclass_of($this->productAttributeClass, FinderExcludable::class)) {
             $newConfiguration
@@ -37,5 +37,10 @@ final class AdminMenuListener
                 ->addChild('Exclude Options', ['route' => 'cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_index'])
                 ->setLabel('Product List Filter Option Exclusion');
         }
+
+        $newConfiguration
+            ->addChild('cr_extended_search_configuration', ['route' => 'cr_sylius_extended_elasticsearch_plugin_admin_search_configuration_index'])
+            ->setLabel('cr_sylius_extended_elasticsearch_plugin.admin.menu.extended_search_configuration.label')
+        ;
     }
 }

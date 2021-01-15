@@ -6,6 +6,7 @@ imports:
     - { resource: "state_machine/sylius_order.yaml" }
     - { resource: "grid/grid_exclude_attribute.yaml" }
     - { resource: "grid/grid_exclude_option.yaml" }
+    - { resource: "grid/grid_search_configuration.yaml" }
 
 parameters:
     cr_ees_host: localhost
@@ -16,3 +17,11 @@ fos_elastica:
         default:
             host: "%cr_ees_host%"
             port: "%cr_ees_port%"
+
+sylius_resource:
+    resources:
+        cr_sylius_extended_elasticsearch_plugin.search_configuration:
+            driver: doctrine/orm
+            classes:
+                model: CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration
+                form: CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\SearchConfigurationType

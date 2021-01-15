@@ -26,3 +26,19 @@ cr_sylius_extended_elasticsearch_plugin:
                 label: Catégorie
         filter_excluded: Exclu(e) du Filtre
         include_exclude: Inclure ou Exclure
+    admin:
+        menu:
+            extended_search.label: Recherche avancée
+            extended_search_configuration.label: Configuration
+        form:
+            search_configuration:
+                label:
+                    attribute: Attribut
+                    option: Option
+                    taxon: Taxon (laisser vide pour utiliser ce champ pour la recherche générale)
+                    channel: Canal
+                    searchable: Texte recherchable ?
+                    filterable: Utiliser comme facette ?
+    facet_type:
+        checkbox:
+            label: Cases à cocher
