@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder;
 
-use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolverInterface;
+use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\AttributeTextPropertyNameResolverInterface;
 use Elastica\Document;
 use FOS\ElasticaBundle\Event\TransformEvent;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -14,13 +14,13 @@ use Sylius\Component\Core\Model\ProductTranslationInterface;
 
 final class AttributeTextBuilder extends AbstractBuilder
 {
-    /** @var ConcatedNameResolverInterface */
+    /** @var AttributeTextPropertyNameResolverInterface */
     private $attributeTextNameResolver;
 
     /** @var string */
     private $defaultLocale;
 
-    public function __construct(ConcatedNameResolverInterface $attributeTextNameResolver, string $defaultLocale)
+    public function __construct(AttributeTextPropertyNameResolverInterface $attributeTextNameResolver, string $defaultLocale)
     {
         $this->attributeTextNameResolver = $attributeTextNameResolver;
         $this->defaultLocale = $defaultLocale;
@@ -54,7 +54,7 @@ final class AttributeTextBuilder extends AbstractBuilder
             return;
         }
 
-        $index = $this->attributeTextNameResolver->resolvePropertyName("{$attribute->getCode()}_{$locale}");
+        $index = $this->attributeTextNameResolver->resolvePropertyName($attribute, $locale);
         $value = $attributeValue->getValue();
 
         if ($attribute->getType() === 'select') {

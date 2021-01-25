@@ -82,13 +82,13 @@
         </service>
 
         <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\AttributeTextBuilder" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\AttributeTextBuilder">
-            <argument key="$attributeTextNameResolver" type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.attribute_text" />
+            <argument key="$attributeTextNameResolver" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\AttributeTextPropertyNameResolver" />
             <argument key="$defaultLocale" type="expression">service('sylius.translation_locale_provider').getDefaultLocaleCode()</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\OptionTextBuilder" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder\OptionTextBuilder">
-            <argument key="$optionTextNameResolver" type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.option_text" />
+            <argument key="$optionTextNameResolver" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\OptionTextPropertyNameResolver" />
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

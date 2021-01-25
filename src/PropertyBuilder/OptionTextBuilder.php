@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyBuilder;
 
-use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolverInterface;
+use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\OptionTextPropertyNameResolverInterface;
 use Elastica\Document;
 use FOS\ElasticaBundle\Event\TransformEvent;
-use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Product\Model\ProductOptionValueTranslationInterface;
 
 final class OptionTextBuilder extends AbstractBuilder
 {
-    /** @var ConcatedNameResolverInterface */
+    /** @var OptionTextPropertyNameResolverInterface */
     private $optionTextNameResolver;
 
-    public function __construct(ConcatedNameResolverInterface $optionTextNameResolver)
+    public function __construct(OptionTextPropertyNameResolverInterface $optionTextNameResolver)
     {
         $this->optionTextNameResolver = $optionTextNameResolver;
     }
@@ -36,10 +33,10 @@ final class OptionTextBuilder extends AbstractBuilder
     {
         foreach ($product->getVariants() as $productVariant) {
             foreach ($productVariant->getOptionValues() as $productOptionValue) {
-                $optionCode = $productOptionValue->getOption()->getCode();
+                $option = $productOptionValue->getOption();
                 foreach ($productOptionValue->getTranslations() as $translation) {
                     /** @var $translation ProductOptionValueTranslationInterface */
-                    $index = $this->optionTextNameResolver->resolvePropertyName("{$optionCode}_{$translation->getLocale()}");
+                    $index = $this->optionTextNameResolver->resolvePropertyName($option, $translation->getLocale());
                     $options = $document->has($index) ? $document->get($index) : [];
                     $options[] = $translation->getValue();
 

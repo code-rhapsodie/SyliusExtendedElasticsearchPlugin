@@ -14,28 +14,23 @@ final class SearchProductsQueryBuilder implements QueryBuilderInterface
 {
     public const QUERY_KEY = 'query';
 
-    /** @var SearchPropertyNameResolverRegistryInterface */
-    private $searchProperyNameResolverRegistry;
-
-    /** @var LocaleContextInterface */
-    private $localeContext;
-
     /** @var QueryBuilderInterface */
     private $isEnabledQueryBuilder;
 
     /** @var QueryBuilderInterface */
     private $hasChannelQueryBuilder;
 
+    /** @var QueryBuilderInterface */
+    private $textQueryBuilder;
+
     public function __construct(
-        SearchPropertyNameResolverRegistryInterface $searchProperyNameResolverRegistry,
-        LocaleContextInterface $localeContext,
         QueryBuilderInterface $isEnabledQueryBuilder,
-        QueryBuilderInterface $hasChannelQueryBuilder
+        QueryBuilderInterface $hasChannelQueryBuilder,
+        QueryBuilderInterface $textQueryBuilder
     ) {
-        $this->searchProperyNameResolverRegistry = $searchProperyNameResolverRegistry;
-        $this->localeContext = $localeContext;
         $this->isEnabledQueryBuilder = $isEnabledQueryBuilder;
         $this->hasChannelQueryBuilder = $hasChannelQueryBuilder;
+        $this->textQueryBuilder = $textQueryBuilder;
     }
 
     public function buildQuery(array $data): ?AbstractQuery
@@ -60,16 +55,8 @@ final class SearchProductsQueryBuilder implements QueryBuilderInterface
             );
         }
 
-        $multiMatch = new MultiMatch();
-        $multiMatch->setQuery($query);
-        $multiMatch->setFuzziness('AUTO');
-        $fields = [];
-        foreach ($this->searchProperyNameResolverRegistry->getPropertyNameResolvers() as $propertyNameResolver) {
-            $fields[] = $propertyNameResolver->resolvePropertyName($this->localeContext->getLocaleCode());
-        }
-        $multiMatch->setFields($fields);
         $bool = new BoolQuery();
-        $bool->addMust($multiMatch);
+        $bool->addMust($this->textQueryBuilder->buildQuery([TextQueryBuilder::QUERY_FIELD => $query]));
         $bool->addFilter($this->isEnabledQueryBuilder->buildQuery([]));
         $bool->addFilter($this->hasChannelQueryBuilder->buildQuery([]));
 

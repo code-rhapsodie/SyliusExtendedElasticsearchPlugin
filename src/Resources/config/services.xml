@@ -56,7 +56,9 @@
             <argument key="$repository" type="service" id="sylius.repository.product_option"/>
         </service>
 
-        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepositoryInterface" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepository">
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepository" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepository">
+            <factory service="doctrine.orm.entity_manager" method="getRepository" />
+            <argument>CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration</argument>
         </service>
 
         <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
