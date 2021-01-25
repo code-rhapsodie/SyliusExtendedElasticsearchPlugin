@@ -30,6 +30,10 @@ class FacetTypeChoiceModelTransformer implements DataTransformerInterface
 
     public function reverseTransform($value)
     {
+        if (null === $value) {
+            return null;
+        }
+
         /** @var $value FacetTypeInterface */
         return $value->getKey();
     }

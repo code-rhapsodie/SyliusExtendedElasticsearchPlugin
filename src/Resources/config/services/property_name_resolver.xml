@@ -47,5 +47,13 @@
         <service id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.taxon_position" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
             <argument>%cr_ees_shop_taxon_position_property_prefix%</argument>
         </service>
+
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.attribute_text" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_attribute_text_property_prefix%</argument>
+        </service>
+
+        <service id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.option_text" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
+            <argument>%cr_ees_shop_option_text_property_prefix%</argument>
+        </service>
     </services>
 </container>
