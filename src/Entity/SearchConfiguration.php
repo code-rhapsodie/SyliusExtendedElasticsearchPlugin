@@ -87,96 +87,56 @@ class SearchConfiguration implements ResourceInterface
         return $this->filterOptions;
     }
 
-    /**
-     * @param ProductAttributeInterface|null $attribute
-     *
-     * @return SearchConfiguration
-     */
-    public function setAttribute(?ProductAttributeInterface $attribute): SearchConfiguration
+    public function setAttribute(?ProductAttributeInterface $attribute): self
     {
         $this->attribute = $attribute;
 
         return $this;
     }
 
-    /**
-     * @param ProductOptionInterface|null $option
-     *
-     * @return SearchConfiguration
-     */
-    public function setOption(?ProductOptionInterface $option): SearchConfiguration
+    public function setOption(?ProductOptionInterface $option): self
     {
         $this->option = $option;
 
         return $this;
     }
 
-    /**
-     * @param TaxonInterface|null $taxon
-     *
-     * @return SearchConfiguration
-     */
-    public function setTaxon(?TaxonInterface $taxon): SearchConfiguration
+    public function setTaxon(?TaxonInterface $taxon): self
     {
         $this->taxon = $taxon;
 
         return $this;
     }
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return SearchConfiguration
-     */
-    public function setChannel(ChannelInterface $channel): SearchConfiguration
+    public function setChannel(ChannelInterface $channel): self
     {
         $this->channel = $channel;
 
         return $this;
     }
 
-    /**
-     * @param bool $searchable
-     *
-     * @return SearchConfiguration
-     */
-    public function setSearchable(bool $searchable): SearchConfiguration
+    public function setSearchable(bool $searchable): self
     {
         $this->searchable = $searchable;
 
         return $this;
     }
 
-    /**
-     * @param bool $filterable
-     *
-     * @return SearchConfiguration
-     */
-    public function setFilterable(bool $filterable): SearchConfiguration
+    public function setFilterable(bool $filterable): self
     {
         $this->filterable = $filterable;
 
         return $this;
     }
 
-    /**
-     * @param string|null $facetType
-     *
-     * @return SearchConfiguration
-     */
-    public function setFacetType(?string $facetType): SearchConfiguration
+    public function setFacetType(?string $facetType): self
     {
         $this->facetType = $facetType;
 
         return $this;
     }
 
-    /**
-     * @param array $filterOptions
-     *
-     * @return SearchConfiguration
-     */
-    public function setFilterOptions(array $filterOptions): SearchConfiguration
+    public function setFilterOptions(array $filterOptions): self
     {
         $this->filterOptions = $filterOptions;
 

@@ -10,7 +10,6 @@ use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurati
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MultiMatch;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class TextQueryBuilder implements QueryBuilderInterface
 {

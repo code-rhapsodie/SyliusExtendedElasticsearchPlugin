@@ -35,7 +35,7 @@ final class OptionTextBuilder extends AbstractBuilder
             foreach ($productVariant->getOptionValues() as $productOptionValue) {
                 $option = $productOptionValue->getOption();
                 foreach ($productOptionValue->getTranslations() as $translation) {
-                    /** @var $translation ProductOptionValueTranslationInterface */
+                    /** @var ProductOptionValueTranslationInterface $translation */
                     $index = $this->optionTextNameResolver->resolvePropertyName($option, $translation->getLocale());
                     $options = $document->has($index) ? $document->get($index) : [];
                     $options[] = $translation->getValue();

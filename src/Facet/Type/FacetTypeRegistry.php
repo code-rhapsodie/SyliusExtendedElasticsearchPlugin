@@ -9,9 +9,7 @@ use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Exception\FacetTypeNotFoundE
 
 final class FacetTypeRegistry implements FacetTypeRegistryInterface
 {
-    /**
-     * @var FacetTypeInterface[]
-     */
+    /** @var FacetTypeInterface[] */
     private $registry;
 
     public function __construct()

@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\QueryBuilder;
 
-use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchPropertyNameResolverRegistryInterface;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\MultiMatch;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class SearchProductsQueryBuilder implements QueryBuilderInterface
 {

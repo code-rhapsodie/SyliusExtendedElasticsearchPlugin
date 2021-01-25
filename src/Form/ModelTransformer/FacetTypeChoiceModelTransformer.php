@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\ModelTransformer;
 
-use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeInterface;
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class FacetTypeChoiceModelTransformer implements DataTransformerInterface
 {
@@ -34,7 +32,6 @@ class FacetTypeChoiceModelTransformer implements DataTransformerInterface
             return null;
         }
 
-        /** @var $value FacetTypeInterface */
         return $value->getKey();
     }
 }

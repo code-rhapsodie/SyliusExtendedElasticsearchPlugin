@@ -38,7 +38,7 @@ final class AttributeTextBuilder extends AbstractBuilder
     private function resolveProductAttributes(ProductInterface $product, Document $document): void
     {
         foreach ($product->getTranslations() as $productTranslation) {
-            /** @var $productTranslation ProductTranslationInterface */
+            /** @var ProductTranslationInterface $productTranslation */
             $locale = $productTranslation->getLocale();
 
             foreach ($product->getAttributesByLocale($locale, $this->defaultLocale) as $attributeValue) {
@@ -66,7 +66,6 @@ final class AttributeTextBuilder extends AbstractBuilder
 
     /**
      * @param string|array $value
-     * @param AttributeInterface $attribute
      *
      * @return string|array
      */
