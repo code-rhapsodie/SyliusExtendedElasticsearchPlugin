@@ -11,9 +11,14 @@ final class SearchConfigurationRepository extends EntityRepository implements Se
 {
     public function findSearchableByChannel(ChannelInterface $channel): array
     {
-        return $this->findBy([
-            'searchable' => true,
-            'channel' => $channel,
-        ]);
+        $qb = $this->createQueryBuilder('sc');
+
+        return $qb
+            ->andWhere('sc.searchable = true')
+            ->andWhere($qb->expr()->isMemberOf(':channel', 'sc.channels'))
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }

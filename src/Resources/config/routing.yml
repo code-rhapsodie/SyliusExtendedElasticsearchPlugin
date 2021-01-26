@@ -81,8 +81,6 @@ cr_sylius_extended_elasticsearch_plugin_admin_search_configuration:
         redirect: update
         grid: cr_sylius_extended_elasticsearch_plugin_admin_search_configuration_index
         vars:
-            all:
-                subheader: HEADER
             index:
                 icon: 'cubes'
     type: sylius.resource

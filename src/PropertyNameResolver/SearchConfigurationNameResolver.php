@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver;
 
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration;
+use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Exception\IncompleteSearchConfigurationException;
 
 final class SearchConfigurationNameResolver implements SearchConfigurationNameResolverInterface
 {
@@ -38,6 +39,6 @@ final class SearchConfigurationNameResolver implements SearchConfigurationNameRe
             );
         }
 
-        // TODO throw stuff
+        throw IncompleteSearchConfigurationException::create();
     }
 }

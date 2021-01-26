@@ -27,11 +27,16 @@ final class SearchConfigurationType extends AbstractType
                 'required' => false,
                 'label' => 'cr_sylius_extended_elasticsearch_plugin.admin.form.search_configuration.label.option',
             ])
-            ->add('taxon', TaxonAutocompleteChoiceType::class, [
+            ->add('taxons', TaxonAutocompleteChoiceType::class, [
                 'required' => false,
+                'multiple' => true,
                 'label' => 'cr_sylius_extended_elasticsearch_plugin.admin.form.search_configuration.label.taxon',
             ])
-            ->add('channel', ChannelChoiceType::class, [
+            ->add('usedInGlobalSearch', CheckboxType::class, [
+                'label' => 'cr_sylius_extended_elasticsearch_plugin.admin.form.search_configuration.label.used_in_global_search',
+            ])
+            ->add('channels', ChannelChoiceType::class, [
+                'multiple' => true,
                 'label' => 'cr_sylius_extended_elasticsearch_plugin.admin.form.search_configuration.label.channel',
             ])
             ->add('searchable', CheckboxType::class, [
@@ -42,6 +47,7 @@ final class SearchConfigurationType extends AbstractType
             ])
             ->add('facetType', FacetTypeChoiceType::class, [
                 'required' => false,
+                'label' => 'cr_sylius_extended_elasticsearch_plugin.admin.form.search_configuration.label.facet_type',
             ])
         ;
     }

@@ -7,6 +7,8 @@ CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration:
             generator:
                 strategy: AUTO
     fields:
+        usedInGlobalSearch:
+            type: boolean
         searchable:
             type: boolean
         filterable:
@@ -22,9 +24,8 @@ CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration:
             targetEntity: Sylius\Component\Attribute\Model\AttributeInterface
         option:
             targetEntity: Sylius\Component\Product\Model\ProductOptionInterface
-        taxon:
+    manyToMany:
+        taxons:
             targetEntity: Sylius\Component\Core\Model\TaxonInterface
-        channel:
+        channels:
             targetEntity: Sylius\Component\Core\Model\ChannelInterface
-            joinColumn:
-                nullable: false

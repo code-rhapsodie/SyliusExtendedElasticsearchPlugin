@@ -61,9 +61,13 @@
             <argument>CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration</argument>
         </service>
 
-        <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
+        <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.create.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
             <argument>@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Crud/SearchConfiguration/javascripts.html.twig</argument>
             <tag name="kernel.event_listener" event="sonata.block.event.cr_sylius_extended_elasticsearch_plugin.admin.search_configuration.create.javascripts" method="onBlockEvent" />
+        </service>
+        <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.update.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
+            <argument>@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Crud/SearchConfiguration/javascripts.html.twig</argument>
+            <tag name="kernel.event_listener" event="sonata.block.event.cr_sylius_extended_elasticsearch_plugin.admin.search_configuration.update.javascripts" method="onBlockEvent" />
         </service>
 
         <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" />

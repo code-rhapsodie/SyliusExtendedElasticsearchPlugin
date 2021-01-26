@@ -8,29 +8,38 @@ sylius_grid:
             fields:
                 attribute:
                     type: string
-                    label: ATTRIBUTE
+                    label: cr_sylius_extended_elasticsearch_plugin.admin.grid.search_configuration.attribute
                 option:
                     type: string
-                    label: OPTION
-                taxon:
-                    type: string
-                    label: TAXON
-                channel:
-                    type: string
-                    label: CHANNEL
+                    label: cr_sylius_extended_elasticsearch_plugin.admin.grid.search_configuration.option
+                taxons:
+                    type: twig
+                    label: cr_sylius_extended_elasticsearch_plugin.admin.grid.search_configuration.taxon
+                    options:
+                        template: "@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Grid/Field/taxons.html.twig"
+                channels:
+                    type: twig
+                    label: cr_sylius_extended_elasticsearch_plugin.admin.grid.search_configuration.channel
+                    options:
+                        template: "@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Grid/Field/channels.html.twig"
+                usedInGlobalSearch:
+                    type: twig
+                    label: cr_sylius_extended_elasticsearch_plugin.admin.grid.search_configuration.used_in_global_search
+                    options:
+                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
                 searchable:
                     type: twig
-                    label: SEARCHABLE
+                    label: cr_sylius_extended_elasticsearch_plugin.admin.grid.search_configuration.searchable
                     options:
                         template: "@SyliusUi/Grid/Field/yesNo.html.twig"
                 filterable:
                     type: twig
-                    label: FILTERABLE
+                    label: cr_sylius_extended_elasticsearch_plugin.admin.grid.search_configuration.filterable
                     options:
                         template: "@SyliusUi/Grid/Field/yesNo.html.twig"
-                filterOptions:
-                    type: string
-                    label: OPTIONS
+#                filterOptions:
+#                    type: string
+#                    label: OPTIONS
             actions:
                 main:
                     create:

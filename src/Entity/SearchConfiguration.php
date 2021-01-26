@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -21,11 +23,14 @@ class SearchConfiguration implements ResourceInterface
     /** @var ProductOptionInterface|null */
     private $option;
 
-    /** @var TaxonInterface|null */
-    private $taxon;
+    /** @var Collection */
+    private $taxons;
 
-    /** @var ChannelInterface */
-    private $channel;
+    /** @var Collection */
+    private $channels;
+
+    /** @var bool */
+    private $usedInGlobalSearch;
 
     /** @var bool */
     private $searchable;
@@ -38,6 +43,16 @@ class SearchConfiguration implements ResourceInterface
 
     /** @var array */
     private $filterOptions;
+
+    public function __construct()
+    {
+        $this->taxons = new ArrayCollection();
+        $this->channels = new ArrayCollection();
+        $this->usedInGlobalSearch = true;
+        $this->searchable = false;
+        $this->filterable = false;
+        $this->filterOptions = [];
+    }
 
     /**
      * @return int
@@ -57,22 +72,27 @@ class SearchConfiguration implements ResourceInterface
         return $this->option;
     }
 
-    public function getTaxon(): ?TaxonInterface
+    public function getTaxons(): Collection
     {
-        return $this->taxon;
+        return $this->taxons;
     }
 
-    public function getChannel(): ?ChannelInterface
+    public function getChannels(): Collection
     {
-        return $this->channel;
+        return $this->channels;
     }
 
-    public function isSearchable(): ?bool
+    public function isUsedInGlobalSearch(): bool
+    {
+        return $this->usedInGlobalSearch;
+    }
+
+    public function isSearchable(): bool
     {
         return $this->searchable;
     }
 
-    public function isFilterable(): ?bool
+    public function isFilterable(): bool
     {
         return $this->filterable;
     }
@@ -82,7 +102,7 @@ class SearchConfiguration implements ResourceInterface
         return $this->facetType;
     }
 
-    public function getFilterOptions(): ?array
+    public function getFilterOptions(): array
     {
         return $this->filterOptions;
     }
@@ -101,16 +121,23 @@ class SearchConfiguration implements ResourceInterface
         return $this;
     }
 
-    public function setTaxon(?TaxonInterface $taxon): self
+    public function setTaxons(Collection $taxons): self
     {
-        $this->taxon = $taxon;
+        $this->taxons = $taxons;
 
         return $this;
     }
 
-    public function setChannel(ChannelInterface $channel): self
+    public function setChannels(Collection $channels): self
     {
-        $this->channel = $channel;
+        $this->channels = $channels;
+
+        return $this;
+    }
+
+    public function setUsedInGlobalSearch(bool $usedInGlobalSearch): self
+    {
+        $this->usedInGlobalSearch = $usedInGlobalSearch;
 
         return $this;
     }

@@ -5,6 +5,7 @@ jQuery(function ($) {
     attributeChoice.change(function () {
         const value = $(this).val();
         console.log(value);
+
         if (!value) {
             optionChoice.parent().show();
         } else {
@@ -15,7 +16,7 @@ jQuery(function ($) {
 
     optionChoice.change(function () {
         const value = $(this).val();
-        console.log(value);
+
         if (!value) {
             attributeChoice.parent().show();
         } else {
@@ -23,4 +24,7 @@ jQuery(function ($) {
             attributeChoice.val('');
         }
     });
+
+    attributeChoice.change();
+    optionChoice.change();
 });
