@@ -1,10 +1,11 @@
 jQuery(function ($) {
     const attributeChoice = $('#search_configuration_attribute');
     const optionChoice = $('#search_configuration_option');
+    const filterableCheckbox = $('#search_configuration_filterable');
+    const facetTypeChoice = $('#search_configuration_facetType');
 
     attributeChoice.change(function () {
         const value = $(this).val();
-        console.log(value);
 
         if (!value) {
             optionChoice.parent().show();
@@ -25,6 +26,18 @@ jQuery(function ($) {
         }
     });
 
+    filterableCheckbox.change(function () {
+        const value = $(this).is(':checked');
+
+        if (value) {
+            facetTypeChoice.parent().show();
+        } else {
+            facetTypeChoice.parent().hide();
+            facetTypeChoice.val('');
+        }
+    });
+
     attributeChoice.change();
     optionChoice.change();
+    filterableCheckbox.change();
 });

@@ -15,12 +15,22 @@ final class SearchConfigurationNameResolver implements SearchConfigurationNameRe
     /** @var OptionTextPropertyNameResolverInterface */
     private $optionTextPropertyNameResolver;
 
+    /** @var ConcatedNameResolverInterface */
+    private $attributeValuePropertyNameResolver;
+
+    /** @var ConcatedNameResolverInterface */
+    private $optionValuePropertyNameResolver;
+
     public function __construct(
         AttributeTextPropertyNameResolverInterface $attributeTextPropertyNameResolver,
-        OptionTextPropertyNameResolverInterface $optionTextPropertyNameResolver
+        OptionTextPropertyNameResolverInterface $optionTextPropertyNameResolver,
+        ConcatedNameResolverInterface $attributeValuePropertyNameResolver,
+        ConcatedNameResolverInterface $optionValuePropertyNameResolver
     ) {
         $this->attributeTextPropertyNameResolver = $attributeTextPropertyNameResolver;
         $this->optionTextPropertyNameResolver = $optionTextPropertyNameResolver;
+        $this->attributeValuePropertyNameResolver = $attributeValuePropertyNameResolver;
+        $this->optionValuePropertyNameResolver = $optionValuePropertyNameResolver;
     }
 
     public function resolveTextName(SearchConfiguration $searchConfiguration, string $localeCode): string
@@ -36,6 +46,23 @@ final class SearchConfigurationNameResolver implements SearchConfigurationNameRe
             return $this->optionTextPropertyNameResolver->resolvePropertyName(
                 $searchConfiguration->getOption(),
                 $localeCode
+            );
+        }
+
+        throw IncompleteSearchConfigurationException::create();
+    }
+
+    public function resolveValueName(SearchConfiguration $searchConfiguration): string
+    {
+        if ($searchConfiguration->getAttribute() !== null) {
+            return $this->attributeValuePropertyNameResolver->resolvePropertyName(
+                $searchConfiguration->getAttribute()->getCode()
+            );
+        }
+
+        if ($searchConfiguration->getOption() !== null) {
+            return $this->optionValuePropertyNameResolver->resolvePropertyName(
+                $searchConfiguration->getOption()->getCode()
             );
         }
 

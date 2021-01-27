@@ -10,10 +10,12 @@ use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurati
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MultiMatch;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class TextQueryBuilder implements QueryBuilderInterface
+final class TextQueryBuilder extends AbstractOptionsResolverBasedQueryBuilder
 {
-    public const QUERY_FIELD = 'query';
+    public const QUERY_KEY = 'query';
+    public const GLOBAL_KEY = 'global';
 
     /** @var string */
     private $localeCode;
@@ -44,18 +46,39 @@ final class TextQueryBuilder implements QueryBuilderInterface
         $this->searchConfigurationNameResolver = $searchConfigurationNameResolver;
     }
 
-    public function buildQuery(array $data): ?AbstractQuery
+    protected function configureOptions(OptionsResolver $optionsResolver)
     {
-        $query = $data[self::QUERY_FIELD];
+        $optionsResolver
+            ->setRequired(self::QUERY_KEY)
+            ->setAllowedTypes(self::QUERY_KEY, 'string')
+            ->setDefault(self::GLOBAL_KEY, false)
+            ->setAllowedTypes(self::GLOBAL_KEY, 'bool')
+        ;
+    }
+
+    protected function doBuildQuery(array $data): ?AbstractQuery
+    {
+        $query = $data[self::QUERY_KEY];
+        $global = $data[self::GLOBAL_KEY];
 
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery($query);
         $multiMatch->setFuzziness('AUTO');
+
         $fields = [];
         foreach ($this->searchPropertyNameResolverRegistry->getPropertyNameResolvers() as $propertyNameResolver) {
             $fields[] = $propertyNameResolver->resolvePropertyName($this->localeCode);
         }
-        foreach ($this->searchConfigurationRepository->findSearchableByChannel($this->channelContext->getChannel()) as $searchConfiguration) {
+
+        $searchConfigurations = [];
+        if ($global) {
+            $searchConfigurations = $this->searchConfigurationRepository->findSearchableAndGlobalByChannel(
+                $this->channelContext->getChannel()
+            );
+        }
+        // TODO Taxon stuff
+
+        foreach ($searchConfigurations as $searchConfiguration) {
             $fields[] = $this->searchConfigurationNameResolver->resolveTextName($searchConfiguration, $this->localeCode);
         }
         $multiMatch->setFields($fields);

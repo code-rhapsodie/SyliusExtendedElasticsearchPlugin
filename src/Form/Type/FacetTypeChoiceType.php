@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FacetTypeChoiceType extends AbstractType
+final class FacetTypeChoiceType extends AbstractType
 {
     /** @var FacetTypeRegistryInterface */
     private $facetTypeRegistry;

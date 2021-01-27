@@ -43,9 +43,10 @@
         </service>
 
         <service id="cr_sylius_extended_elasticsearch_plugin.form.type.search" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\SearchType">
-            <argument type="service" id="fos_elastica.finder.bitbag_shop_product.default" />
-            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.facet.registry" />
-            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.search_products" />
+            <argument key="$finder" type="service" id="fos_elastica.finder.bitbag_shop_product.default" />
+            <argument key="$facetRegistry" type="service" id="cr_sylius_extended_elasticsearch_plugin.facet.registry" />
+            <argument key="$searchProductsQueryBuilder" type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.search_products" />
+            <argument key="$facetGateway" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Gateway\FacetGatewayInterface" />
             <tag name="form.type" />
         </service>
 

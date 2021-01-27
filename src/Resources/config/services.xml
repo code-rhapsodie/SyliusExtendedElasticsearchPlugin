@@ -40,12 +40,6 @@
             <argument type="service" id="service_container" />
         </service>
 
-        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Menu\AdminMenuListener" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Menu\AdminMenuListener">
-            <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addAdminMenuItems" />
-            <argument key="$productAttributeClass">%sylius.model.product_attribute.class%</argument>
-            <argument key="$productOptionClass">%sylius.model.product_option.class%</argument>
-        </service>
-
         <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductAttributeController" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\ProductAttributeController">
             <tag name="controller.service_arguments" />
             <argument key="$repository" type="service" id="sylius.repository.product_attribute"/>
@@ -60,22 +54,7 @@
             <factory service="doctrine.orm.entity_manager" method="getRepository" />
             <argument>CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration</argument>
         </service>
-
-        <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.create.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
-            <argument>@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Crud/SearchConfiguration/javascripts.html.twig</argument>
-            <tag name="kernel.event_listener" event="sonata.block.event.cr_sylius_extended_elasticsearch_plugin.admin.search_configuration.create.javascripts" method="onBlockEvent" />
-        </service>
-        <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.update.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
-            <argument>@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Crud/SearchConfiguration/javascripts.html.twig</argument>
-            <tag name="kernel.event_listener" event="sonata.block.event.cr_sylius_extended_elasticsearch_plugin.admin.search_configuration.update.javascripts" method="onBlockEvent" />
-        </service>
-
-        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" />
-        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistryInterface" alias="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" />
-
-        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\CheckboxFacetType" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\CheckboxFacetType">
-            <tag name="cr.sylius_extended_elasticsearch_plugin.facet_type" />
-        </service>
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepositoryInterface" alias="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepository"/>
 
         <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\FacetTypeChoiceType" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type\FacetTypeChoiceType">
             <argument key="$facetTypeRegistry" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistryInterface" />

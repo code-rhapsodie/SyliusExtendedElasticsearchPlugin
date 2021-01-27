@@ -16,5 +16,26 @@
 
         <service id="cr_sylius_extended_elasticsearch_plugin.facet.registry" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Registry" />
         <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\RegistryInterface" alias="cr_sylius_extended_elasticsearch_plugin.facet.registry" />
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" />
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistryInterface" alias="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistry" />
+
+        <service abstract="true" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\AbstractFacetType">
+            <argument key="$searchConfigurationNameResolver" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchConfigurationNameResolverInterface" />
+        </service>
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\CheckboxFacetType" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\CheckboxFacetType" parent="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\AbstractFacetType">
+            <argument key="$attributeRepository" type="service" id="sylius.repository.product_attribute" />
+            <argument key="$optionRepository" type="service" id="sylius.repository.product_option" />
+            <argument key="$locale" type="expression">service('sylius.context.locale').getLocaleCode()</argument>
+            <argument key="$defaultLocale" type="expression">service('sylius.translation_locale_provider').getDefaultLocaleCode()</argument>
+            <tag name="cr.sylius_extended_elasticsearch_plugin.facet_type" />
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Gateway\FacetGateway" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Gateway\FacetGateway">
+            <argument key="$repository" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepositoryInterface" />
+            <argument key="$registry" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Type\FacetTypeRegistryInterface" />
+            <argument key="$channel" type="expression">service('sylius.context.channel').getChannel()</argument>
+        </service>
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Gateway\FacetGatewayInterface" alias="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Gateway\FacetGateway" />
     </services>
 </container>
