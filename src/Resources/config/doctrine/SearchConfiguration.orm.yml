@@ -1,5 +1,6 @@
 CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration:
     type: entity
+    table: cr_seee_search_configuration
     repositoryClass: CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepository
     id:
         id:
@@ -27,5 +28,9 @@ CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration:
     manyToMany:
         taxons:
             targetEntity: Sylius\Component\Core\Model\TaxonInterface
+            joinTable:
+                name: cr_seee_search_configuration_taxoninterface
         channels:
             targetEntity: Sylius\Component\Core\Model\ChannelInterface
+            joinTable:
+                name: cr_seee_search_configuration_channelinterface
