@@ -1,0 +1,36 @@
+CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Entity\SearchConfiguration:
+    type: entity
+    table: cr_seee_search_configuration
+    repositoryClass: CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        usedInGlobalSearch:
+            type: boolean
+        searchable:
+            type: boolean
+        filterable:
+            type: boolean
+        facetType:
+            type: string
+            nullable: true
+        filterOptions:
+            type: json
+            nullable: true
+    manyToOne:
+        attribute:
+            targetEntity: Sylius\Component\Attribute\Model\AttributeInterface
+        option:
+            targetEntity: Sylius\Component\Product\Model\ProductOptionInterface
+    manyToMany:
+        taxons:
+            targetEntity: Sylius\Component\Core\Model\TaxonInterface
+            joinTable:
+                name: cr_seee_search_configuration_taxoninterface
+        channels:
+            targetEntity: Sylius\Component\Core\Model\ChannelInterface
+            joinTable:
+                name: cr_seee_search_configuration_channelinterface

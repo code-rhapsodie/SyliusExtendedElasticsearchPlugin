@@ -4,21 +4,14 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\QueryBuilder;
 
-use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchPropertyNameResolverRegistryInterface;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\MultiMatch;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class SearchProductsQueryBuilder implements QueryBuilderInterface
+final class SearchProductsQueryBuilder extends AbstractOptionsResolverBasedQueryBuilder
 {
     public const QUERY_KEY = 'query';
-
-    /** @var SearchPropertyNameResolverRegistryInterface */
-    private $searchProperyNameResolverRegistry;
-
-    /** @var LocaleContextInterface */
-    private $localeContext;
+    public const GLOBAL_KEY = 'global';
 
     /** @var QueryBuilderInterface */
     private $isEnabledQueryBuilder;
@@ -26,50 +19,39 @@ final class SearchProductsQueryBuilder implements QueryBuilderInterface
     /** @var QueryBuilderInterface */
     private $hasChannelQueryBuilder;
 
+    /** @var QueryBuilderInterface */
+    private $textQueryBuilder;
+
     public function __construct(
-        SearchPropertyNameResolverRegistryInterface $searchProperyNameResolverRegistry,
-        LocaleContextInterface $localeContext,
         QueryBuilderInterface $isEnabledQueryBuilder,
-        QueryBuilderInterface $hasChannelQueryBuilder
+        QueryBuilderInterface $hasChannelQueryBuilder,
+        QueryBuilderInterface $textQueryBuilder
     ) {
-        $this->searchProperyNameResolverRegistry = $searchProperyNameResolverRegistry;
-        $this->localeContext = $localeContext;
         $this->isEnabledQueryBuilder = $isEnabledQueryBuilder;
         $this->hasChannelQueryBuilder = $hasChannelQueryBuilder;
+        $this->textQueryBuilder = $textQueryBuilder;
     }
 
-    public function buildQuery(array $data): ?AbstractQuery
+    protected function configureOptions(OptionsResolver $optionsResolver)
     {
-        if (!array_key_exists(self::QUERY_KEY, $data)) {
-            throw new \RuntimeException(
-                sprintf(
-                    'Could not build search products query because there\'s no "query" key in provided data. ' .
-                    'Got the following keys: %s',
-                    implode(', ', array_keys($data))
-                )
-            );
-        }
-        $query = $data[self::QUERY_KEY];
-        if (!is_string($query)) {
-            throw new \RuntimeException(
-                sprintf(
-                    'Could not build search products query because the provided "query" is expected to be a string ' .
-                    'but "%s" is given.',
-                    is_object($query) ? get_class($query) : gettype($query)
-                )
-            );
-        }
+        $optionsResolver
+            ->setRequired(self::QUERY_KEY)
+            ->setAllowedTypes(self::QUERY_KEY, 'string')
+            ->setDefault(self::GLOBAL_KEY, false)
+            ->setAllowedTypes(self::GLOBAL_KEY, 'bool')
+        ;
+    }
 
-        $multiMatch = new MultiMatch();
-        $multiMatch->setQuery($query);
-        $multiMatch->setFuzziness('AUTO');
-        $fields = [];
-        foreach ($this->searchProperyNameResolverRegistry->getPropertyNameResolvers() as $propertyNameResolver) {
-            $fields[] = $propertyNameResolver->resolvePropertyName($this->localeContext->getLocaleCode());
-        }
-        $multiMatch->setFields($fields);
+    protected function doBuildQuery(array $data): ?AbstractQuery
+    {
+        $query = $data[self::QUERY_KEY];
+        $global = $data[self::GLOBAL_KEY];
+
         $bool = new BoolQuery();
-        $bool->addMust($multiMatch);
+        $bool->addMust($this->textQueryBuilder->buildQuery([
+            TextQueryBuilder::QUERY_KEY => $query,
+            TextQueryBuilder::GLOBAL_KEY => $global,
+        ]));
         $bool->addFilter($this->isEnabledQueryBuilder->buildQuery([]));
         $bool->addFilter($this->hasChannelQueryBuilder->buildQuery([]));
 

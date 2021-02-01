@@ -47,5 +47,21 @@
         <service id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.taxon_position" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolver">
             <argument>%cr_ees_shop_taxon_position_property_prefix%</argument>
         </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\AttributeTextPropertyNameResolver" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\AttributeTextPropertyNameResolver">
+            <argument>%cr_ees_shop_attribute_text_property_prefix%</argument>
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\OptionTextPropertyNameResolver" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\OptionTextPropertyNameResolver">
+            <argument>%cr_ees_shop_option_text_property_prefix%</argument>
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchConfigurationNameResolver" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchConfigurationNameResolver">
+            <argument key="$attributeTextPropertyNameResolver" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\AttributeTextPropertyNameResolver" />
+            <argument key="$optionTextPropertyNameResolver" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\OptionTextPropertyNameResolver" />
+            <argument key="$attributeValuePropertyNameResolver" type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.attribute" />
+            <argument key="$optionValuePropertyNameResolver" type="service" id="cr_sylius_extended_elasticsearch_plugin.property_name_resolver.option" />
+        </service>
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchConfigurationNameResolverInterface" alias="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchConfigurationNameResolver" />
     </services>
 </container>

@@ -17,7 +17,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.position
                     options:
-                        template: "@SyliusUi/Grid/Field/_position.html.twig"
+                        template: "@SyliusUi/Grid/Field/position.html.twig"
                 type:
                     type: string
                     label: sylius.ui.type
@@ -39,5 +39,4 @@ sylius_grid:
                                     id: resource.id
     templates:
         action:
-            include_exclude: "@SyliusUi/Grid/Action/include_exclude.html.twig"
-
+            include_exclude: "@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Grid/Action/include_exclude.html.twig"

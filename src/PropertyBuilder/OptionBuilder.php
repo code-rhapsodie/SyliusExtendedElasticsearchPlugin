@@ -47,7 +47,7 @@ final class OptionBuilder extends AbstractBuilder
                 $optionCode = $productOptionValue->getOption()->getCode();
                 $index = $this->optionNameResolver->resolvePropertyName($optionCode);
                 $options = $document->has($index) ? $document->get($index) : [];
-                $value = $this->stringFormatter->formatToLowercaseWithoutSpaces($productOptionValue->getValue());
+                $value = $this->stringFormatter->formatToLowercaseWithoutSpaces($productOptionValue->getCode());
                 $options[] = $value;
 
                 $document->set($index, array_values(array_unique($options)));

@@ -6,9 +6,11 @@ namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\Action\Shop
 
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Block\SearchFormEventListener;
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\RequestDataHandler\PaginationDataHandlerInterface;
+use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Gateway\FacetGatewayInterface;
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\RegistryInterface;
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Model\Search;
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\QueryBuilder\QueryBuilderInterface;
+use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\QueryBuilder\SearchProductsQueryBuilder;
 use Elastica\Query;
 use FOS\ElasticaBundle\Finder\PaginatedFinderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -35,13 +37,17 @@ final class SearchAction
     /** @var PaginationDataHandlerInterface */
     private $paginationDataHandler;
 
+    /** @var FacetGatewayInterface */
+    private $facetGateway;
+
     public function __construct(
         EngineInterface $templatingEngine,
         PaginatedFinderInterface $finder,
         SearchFormEventListener $searchFormEventListener,
         RegistryInterface $facetRegistry,
         QueryBuilderInterface $searchProductsQueryBuilder,
-        PaginationDataHandlerInterface $paginationDataHandler
+        PaginationDataHandlerInterface $paginationDataHandler,
+        FacetGatewayInterface $facetGateway
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->finder = $finder;
@@ -49,6 +55,7 @@ final class SearchAction
         $this->facetRegistry = $facetRegistry;
         $this->searchProductsQueryBuilder = $searchProductsQueryBuilder;
         $this->paginationDataHandler = $paginationDataHandler;
+        $this->facetGateway = $facetGateway;
     }
 
     public function __invoke(Request $request): Response
@@ -64,14 +71,26 @@ final class SearchAction
 
             $boolQuery = new Query\BoolQuery();
             $boolQuery->addMust(
-                $this->searchProductsQueryBuilder->buildQuery(['query' => $search->getBox()->getQuery()])
+                $this->searchProductsQueryBuilder->buildQuery([
+                    SearchProductsQueryBuilder::QUERY_KEY => $search->getBox()->getQuery(),
+                    SearchProductsQueryBuilder::GLOBAL_KEY => true,
+                ])
             );
 
             if ($search->getFacets()) {
+                $facets = $this->facetGateway->findGlobal();
+
                 foreach ($search->getFacets() as $facetId => $selectedBuckets) {
                     if (!$selectedBuckets) {
                         continue;
                     }
+
+                    if (isset($facets[$facetId])) {
+                        $boolQuery->addFilter($facets[$facetId]->getQuery($selectedBuckets));
+
+                        continue;
+                    }
+
                     $facet = $this->facetRegistry->getFacetById($facetId);
                     $boolQuery->addFilter($facet->getQuery($selectedBuckets));
                 }

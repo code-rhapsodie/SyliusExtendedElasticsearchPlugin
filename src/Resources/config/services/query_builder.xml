@@ -66,10 +66,17 @@
         </service>
 
         <service id="cr_sylius_extended_elasticsearch_plugin.query_builder.search_products" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\QueryBuilder\SearchProductsQueryBuilder">
-            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.search_property_name_resolver_registry" />
-            <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.is_enabled" />
-            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.has_channel" />
+            <argument key="$isEnabledQueryBuilder" type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.is_enabled" />
+            <argument key="$hasChannelQueryBuilder" type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.has_channel" />
+            <argument key="$textQueryBuilder" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\QueryBuilder\TextQueryBuilder" />
+        </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\QueryBuilder\TextQueryBuilder" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\QueryBuilder\TextQueryBuilder">
+            <argument key="$localeCode" type="expression">service('sylius.context.locale').getLocaleCode()</argument>
+            <argument key="$channelContext" type="service" id="sylius.context.channel" />
+            <argument key="$searchPropertyNameResolverRegistry" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchPropertyNameResolverRegistryInterface" />
+            <argument key="$searchConfigurationRepository" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Repository\SearchConfigurationRepository" />
+            <argument key="$searchConfigurationNameResolver" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\PropertyNameResolver\SearchConfigurationNameResolver" />
         </service>
     </services>
 </container>

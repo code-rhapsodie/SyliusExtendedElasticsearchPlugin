@@ -10,6 +10,8 @@ parameters:
     cr_ees_shop_description_property_prefix: description
     cr_ees_shop_short_description_property_prefix: short_description
     cr_ees_shop_taxon_position_property_prefix: taxon_position
+    cr_ees_shop_attribute_text_property_prefix: attributetext
+    cr_ees_shop_option_text_property_prefix: optiontext
 
 fos_elastica:
     indexes:

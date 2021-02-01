@@ -26,5 +26,20 @@
             <argument type="service" id="bitbag.sylius_elasticsearch_plugin.refresher.resource" />
             <argument type="string">fos_elastica.object_persister.bitbag_shop_product.default</argument>
         </service>
+
+        <service id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Menu\AdminMenuListener" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Menu\AdminMenuListener">
+            <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addAdminMenuItems" />
+            <argument key="$productAttributeClass">%sylius.model.product_attribute.class%</argument>
+            <argument key="$productOptionClass">%sylius.model.product_option.class%</argument>
+        </service>
+
+        <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.create.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
+            <argument>@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Crud/SearchConfiguration/javascripts.html.twig</argument>
+            <tag name="kernel.event_listener" event="sonata.block.event.cr_sylius_extended_elasticsearch_plugin.admin.search_configuration.create.javascripts" method="onBlockEvent" />
+        </service>
+        <service id="cr.sylius_extended_elasticsearch_plugin.block_event_listener.admin.search_configuration.update.javascripts" class="Sylius\Bundle\UiBundle\Block\BlockEventListener">
+            <argument>@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Crud/SearchConfiguration/javascripts.html.twig</argument>
+            <tag name="kernel.event_listener" event="sonata.block.event.cr_sylius_extended_elasticsearch_plugin.admin.search_configuration.update.javascripts" method="onBlockEvent" />
+        </service>
     </services>
 </container>

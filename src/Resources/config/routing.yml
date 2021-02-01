@@ -72,3 +72,15 @@ cr_sylius_extended_elasticsearch_plugin_admin_exclude_option_toggle:
     requirements:
         id: \d+
 
+cr_sylius_extended_elasticsearch_plugin_admin_search_configuration:
+    resource: |
+        alias: cr_sylius_extended_elasticsearch_plugin.search_configuration
+        section: admin
+        path: '/%sylius_admin.path_name%/search/configuration'
+        templates: "@SyliusAdmin\\Crud"
+        redirect: update
+        grid: cr_sylius_extended_elasticsearch_plugin_admin_search_configuration_index
+        vars:
+            index:
+                icon: 'cubes'
+    type: sylius.resource

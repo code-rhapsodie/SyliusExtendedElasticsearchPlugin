@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Form\Type;
 
+use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Gateway\FacetGatewayInterface;
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\RegistryInterface;
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Model\Search;
 use CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Model\SearchBox;
@@ -30,14 +31,19 @@ final class SearchType extends AbstractType
     /** @var QueryBuilderInterface */
     private $searchProductsQueryBuilder;
 
+    /** @var FacetGatewayInterface */
+    private $facetGateway;
+
     public function __construct(
         PaginatedFinderInterface $finder,
         RegistryInterface $facetRegistry,
-        QueryBuilderInterface $searchProductsQueryBuilder
+        QueryBuilderInterface $searchProductsQueryBuilder,
+        FacetGatewayInterface $facetGateway
     ) {
         $this->finder = $finder;
         $this->facetRegistry = $facetRegistry;
         $this->searchProductsQueryBuilder = $searchProductsQueryBuilder;
+        $this->facetGateway = $facetGateway;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -47,19 +53,23 @@ final class SearchType extends AbstractType
             ->setMethod('GET')
         ;
 
-        $formModifier = function (FormInterface $form, AdapterInterface $adapter) {
+        $formModifier = function (FormInterface $form, AdapterInterface $adapter, array $facets) {
             if (!$adapter instanceof FantaPaginatorAdapter) {
                 return;
             }
 
-            $form->add('facets', SearchFacetsType::class, ['facets' => $adapter->getAggregations(), 'label' => false]);
+            $form->add('facets', SearchFacetsType::class, [
+                'aggregations' => $adapter->getAggregations(),
+                'label' => false,
+                'facets' => $facets,
+            ]);
         };
 
         $builder
             ->get('box')
             ->addEventListener(
                 FormEvents::POST_SUBMIT,
-                function (FormEvent $event) use ($formModifier) {
+                function (FormEvent $event) use ($formModifier, $options) {
                     /** @var SearchBox $data */
                     $data = $event->getForm()->getData();
 
@@ -67,17 +77,26 @@ final class SearchType extends AbstractType
                         return;
                     }
 
-                    $query = new Query($this->searchProductsQueryBuilder->buildQuery(['query' => $data->getQuery()]));
+                    $query = new Query($this->searchProductsQueryBuilder->buildQuery([
+                        'query' => $data->getQuery(),
+                        'global' => $options['global'],
+                    ]));
 
                     foreach ($this->facetRegistry->getFacets() as $facetId => $facet) {
                         $query->addAggregation($facet->getAggregation()->setName($facetId));
                     }
+
+                    $facets = $this->facetGateway->findGlobal();
+                    foreach ($facets as $facet) {
+                        $query->addAggregation($facet->getAggregation());
+                    }
+
                     $query->setSize(0);
 
                     $results = $this->finder->findPaginated($query);
 
                     if ($results->getAdapter()) {
-                        $formModifier($event->getForm()->getParent(), $results->getAdapter());
+                        $formModifier($event->getForm()->getParent(), $results->getAdapter(), $facets);
                     }
                 }
             )
@@ -86,10 +105,14 @@ final class SearchType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => Search::class,
-            'csrf_protection' => false,
-        ]);
+        $resolver
+            ->setDefaults([
+                'data_class' => Search::class,
+                'csrf_protection' => false,
+                'global' => false,
+            ])
+            ->setAllowedTypes('global', 'bool')
+        ;
     }
 
     public function getBlockPrefix(): string

@@ -13,12 +13,13 @@
         </service>
 
         <service id="cr_sylius_extended_elasticsearch_plugin.controller.action.shop.search" class="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Controller\Action\Shop\SearchAction">
-            <argument type="service" id="templating" />
-            <argument type="service" id="fos_elastica.finder.bitbag_shop_product.default" />
-            <argument type="service" id="bitbag.sylius_elasticsearch_plugin.block_event_listener.search_form" />
-            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.facet.registry" />
-            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.search_products" />
-            <argument type="service" id="cr_sylius_extended_elasticsearch_plugin.controller.request_data_handler.pagination" />
+            <argument key="$templatingEngine" type="service" id="templating" />
+            <argument key="$finder" type="service" id="fos_elastica.finder.bitbag_shop_product.default" />
+            <argument key="$searchFormEventListener" type="service" id="bitbag.sylius_elasticsearch_plugin.block_event_listener.search_form" />
+            <argument key="$facetRegistry" type="service" id="cr_sylius_extended_elasticsearch_plugin.facet.registry" />
+            <argument key="$searchProductsQueryBuilder" type="service" id="cr_sylius_extended_elasticsearch_plugin.query_builder.search_products" />
+            <argument key="$paginationDataHandler" type="service" id="cr_sylius_extended_elasticsearch_plugin.controller.request_data_handler.pagination" />
+            <argument key="$facetGateway" type="service" id="CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Facet\Gateway\FacetGatewayInterface" />
             <tag name="controller.service_arguments" />
         </service>
     </services>

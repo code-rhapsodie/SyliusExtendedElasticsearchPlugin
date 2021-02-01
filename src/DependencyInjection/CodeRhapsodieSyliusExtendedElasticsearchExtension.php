@@ -32,5 +32,31 @@ final class CodeRhapsodieSyliusExtendedElasticsearchExtension extends Extension 
         $container->setParameter('cr_ees_shop_name_property_prefix', $config['shop_name_property_prefix']);
         $container->setParameter('cr_ees_excluded_filter_options', $config['excluded_filter']['options']);
         $container->setParameter('cr_ees_excluded_filter_attributes', $config['excluded_filter']['attributes']);
+
+        $this->doctrineMigration($container);
+    }
+
+    public function doctrineMigration(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('doctrine_migrations') || !$container->hasExtension('sylius_labs_doctrine_migrations_extra')) {
+            return;
+        }
+
+        $doctrineConfig = $container->getExtensionConfig('doctrine_migrations');
+        $migrationsPath = (array) \array_pop($doctrineConfig)['migrations_paths'];
+        $container->prependExtensionConfig('doctrine_migrations', [
+            'migrations_paths' => \array_merge(
+                $migrationsPath ?? [],
+                [
+                    'CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Migrations' => '@CodeRhapsodieSyliusExtendedElasticsearchPlugin/Migrations',
+                ]
+            ),
+        ]);
+
+        $container->prependExtensionConfig('sylius_labs_doctrine_migrations_extra', [
+            'migrations' => [
+                'CodeRhapsodie\SyliusExtendedElasticsearchPlugin\Migrations' => ['Sylius\Bundle\CoreBundle\Migrations'],
+            ],
+        ]);
     }
 }

@@ -58,28 +58,11 @@ final class AttributeBuilder extends AbstractBuilder
             $attributeCode = $attribute->getCode();
             $index = $this->attributeNameResolver->resolvePropertyName($attributeCode);
             $value = $attributeValue->getValue();
-            if ($attribute->getType() === 'select') {
-                $choices = $attribute->getConfiguration()['choices'] ?? [];
-                if (is_array($value)) {
-                    foreach ($value as $i => $item) {
-                        $value[$i] = $choices[$item][$this->localeContext->getLocaleCode()] ?? $item;
-                    }
-                } else {
-                    $value = $choices[$value][$this->localeContext->getLocaleCode()] ?? $value;
-                }
-            }
-            $attributes = [];
 
-            if (is_array($value)) {
-                foreach ($value as $singleElement) {
-                    $attributes[] = $this->stringFormatter->formatToLowercaseWithoutSpaces((string) $singleElement);
-                }
-            } else {
-                $value = is_string($value) ? $this->stringFormatter->formatToLowercaseWithoutSpaces($value) : $value;
-                $attributes[] = $value;
-            }
+            $attributes = $document->has($index) ? $document->get($index) : [];
+            $attributes = array_merge($attributes, (array) $value);
 
-            $document->set($index, $attributes);
+            $document->set($index, array_unique($attributes));
         }
     }
 }
